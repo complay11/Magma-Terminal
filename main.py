@@ -1,17 +1,18 @@
-print("Starting...")
+print("Starting...") #Program booting
 print("Importing libs...")
 import random
 import time
 import sys
 import os
 print("Done!")
-print("Magma Terminal 1.0.0 loaded succesfully!")
+print("===============================================")
+print("Magma Terminal 1.1.0 loaded succesfully!")
 print("For help, type 'help'.")
 print("===============================================")
 
 
-while True:
-    cmd = input("Enter command: ")
+while True: #Main loop
+    cmd = input("Enter command: ") #Getting and executing command
     if cmd == "echo":
         param = input("Enter parameter: ")
         print(param)
@@ -27,7 +28,7 @@ while True:
         print("Path targeted commands:")
         print("======================================================================")
         print("createProject - creates project from template in directory")
-        print("shredFiles - shreds all files in directory")
+        print("deleteFiles - deletes all files in directory")
         print("======================================================================")
     elif cmd == "showProjectTemplate":
         print("Basic project template has:")
@@ -41,7 +42,7 @@ while True:
         print("Path target mode enabled!")
         print("Type 'exit' to enter normal mode.")
         while True:
-            cmd = input(pathNow + ": ")
+            cmd = input(pathNow + ": ") #Path targeted mode
             if cmd == "exit":
                 break
             if cmd == "createProject":
@@ -53,15 +54,27 @@ while True:
                 dirName = pathNow + "/" + projectName
                 open(dirName + "/main.py", 'w')
                 print("Project created succesfully!")
-            elif cmd == "shredFiles":
+            elif cmd == "deleteFiles": 
                 allFiles = os.listdir(pathNow)
                 for i in allFiles:
-                    os.remove(pathNow + "/" + i)
-                    print("Deleted " + i)
+                    name, extension = os.path.splitext(i)
+                    if extension == "":
+                        os.rmdir(pathNow + "/" + i)
+                        print("Deleted " + i)
+                    else:
+                        os.remove(pathNow + "/" + i)
+                        print("Deleted " + i)
+            elif cmd == "createFolder":
+                folderName = input("Enter name: ")
+                dirName = pathNow + "/" + folderName
+                os.mkdir(dirName)
+            elif cmd == "dir":
+                allFiles = os.listdir(pathNow)
+                print(allFiles)
 
 
     elif cmd == "exit":
         print("Exiting...")
         sys.exit()
     else:
-        print('Command not found!')
+        print('Command not found!') #Command not found script
