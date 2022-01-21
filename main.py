@@ -29,6 +29,8 @@ while True: #Main loop
         print("======================================================================")
         print("createProject - creates project from template in directory")
         print("deleteFiles - deletes all files in directory")
+        print("createProject - creates folder")
+        print("dir - shows files in directory")
         print("======================================================================")
     elif cmd == "showProjectTemplate":
         print("Basic project template has:")
